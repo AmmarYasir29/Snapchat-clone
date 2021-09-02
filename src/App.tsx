@@ -1,24 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import WebcamCapture from "./components/WebcamCapture";
+import "./styles/app.css";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Preview from "./components/Preview";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            <WebcamCapture />
+          </Route>
+          <Route exact path="/preview">
+            <Preview />
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }
