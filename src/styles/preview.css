@@ -1,0 +1,25 @@
+.preview {
+  position: relative;
+}
+
+.closeIcon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 5px;
+  color: white;
+  cursor: pointer;
+}
+.preview_icon {
+  color: white;
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  right: 0;
+  margin: 5px;
+}
+.icon {
+  margin-top: 5px;
+  cursor: pointer;
+}
