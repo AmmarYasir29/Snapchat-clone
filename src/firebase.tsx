@@ -1,4 +1,5 @@
 import firebase from "firebase";
+import "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCb_YeJ60ruiGCjRYkb4cx8aQMoAkzrwgA",
@@ -8,8 +9,13 @@ const firebaseConfig = {
   messagingSenderId: "320830011957",
   appId: "1:320830011957:web:a560edc21a0b71f7cbcf7c",
 };
-
-const firebaseApp = firebase.initializeApp(firebaseConfig);
+let firebaseApp: any;
+if (!firebase.apps.length) {
+  firebaseApp = firebase.initializeApp(firebaseConfig);
+} else {
+  firebaseApp = firebase.app(); // if already initialized, use that one
+}
+// const firebaseApp = firebase.initializeApp(firebaseConfig);
 const db = firebaseApp.firestore();
 const auth = firebase.auth();
 const storage = firebase.storage();

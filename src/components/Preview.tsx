@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { resetImg, selectCapture } from "../store/captureSlice";
@@ -11,6 +11,10 @@ import MusicNoteIcon from "@material-ui/icons/MusicNote";
 import AttachFileIcon from "@material-ui/icons/AttachFile";
 import CropIcon from "@material-ui/icons/Crop";
 import TimerIcon from "@material-ui/icons/Timer";
+import SendIcon from "@material-ui/icons/Send";
+import { v4 as uuidv4 } from "uuid";
+import { db, storage } from "../firebase";
+import firebase from "firebase";
 
 const Preview = () => {
   const cameraImg = useSelector(selectCapture);
@@ -19,12 +23,44 @@ const Preview = () => {
   const closeHandle = () => {
     dispatch(resetImg());
   };
+  //must have referance in firebase
+  const imgRef = useRef(null);
+  const sendImg = () => {
+    const id = uuidv4();
+    //jsut upload file to storge of firebase with name of ref...
+    const uploadTask = storage
+      .ref(`posts/${id}`)
+      .putString(cameraImg, "data_url");
+    //when finish upload (state changed)
+    uploadTask.on(
+      "state_changed",
+      null,
+      error => console.log(error),
+      () => {
+        //save the url (fiel that complete upload) to db
+        storage
+          .ref("posts")
+          .child(id)
+          .getDownloadURL()
+          .then(url => {
+            db.collection("images").add({
+              imageUrl: url,
+              username: "Me",
+              red: false,
+              // profilePic:
+              timeStamp: firebase.firestore.FieldValue.serverTimestamp(),
+            });
+            history.replace("/chats");
+          });
+      }
+    );
+  };
   useEffect(() => {
     if (!cameraImg) history.replace("/");
   }, [cameraImg, history]);
   return (
     <div className="preview">
-      <img src={cameraImg} alt="" />
+      <img ref={imgRef} src={cameraImg} alt="" />
       <CloseIcon className="closeIcon" onClick={closeHandle} />
       <div className="preview_icon">
         <TextFieldsIcon className="icon" />
@@ -34,6 +70,10 @@ const Preview = () => {
         <AttachFileIcon className="icon" />
         <CropIcon className="icon" />
         <TimerIcon className="icon" />
+      </div>
+      <div className="onSend" onClick={sendImg}>
+        <h2>Send Now</h2>
+        <SendIcon className="sendIcon" />
       </div>
     </div>
   );
