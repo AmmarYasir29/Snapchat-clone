@@ -7,9 +7,12 @@ import { db } from "../firebase";
 import { Chat } from "./Chat";
 import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
 import { useHistory } from "react-router";
+import { selectUser } from "../store/appSlice";
+import { useSelector } from "react-redux";
 
 const Chats = () => {
   const [posts, setPosts] = useState([]);
+  const user = useSelector(selectUser);
   const history = useHistory();
   useEffect(() => {
     db.collection("images")
@@ -29,7 +32,7 @@ const Chats = () => {
   return (
     <div className="chats">
       <div className="chat__header">
-        <Avatar className="chat__avatar" />
+        <Avatar src={user.profilePic} className="chat__avatar" />
         <div className="chat__search">
           <SearchIcon className="chat__searchIcon" />
           <input type="text" placeholder="Friends" />
