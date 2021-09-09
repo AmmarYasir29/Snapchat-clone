@@ -47,8 +47,8 @@ const Preview = () => {
               imageUrl: url,
               username: "Me",
               red: false,
-              // profilePic:
-              timeStamp: firebase.firestore.FieldValue.serverTimestamp(),
+              profilePic: null,
+              timestamp: firebase.firestore.FieldValue.serverTimestamp(),
             });
             history.replace("/chats");
           });

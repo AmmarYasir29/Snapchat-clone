@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import captureReducer from "./captureSlice";
+import appReducer from "./appSlice";
 
 export default configureStore({
   reducer: {
     capture: captureReducer,
+    app: appReducer,
   },
 });
 // export default store;
