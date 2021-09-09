@@ -5,10 +5,12 @@ import ChatBubbleIcon from "@material-ui/icons/ChatBubble";
 import "../styles/chats.css";
 import { db } from "../firebase";
 import { Chat } from "./Chat";
+import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
+import { useHistory } from "react-router";
 
 const Chats = () => {
   const [posts, setPosts] = useState([]);
-
+  const history = useHistory();
   useEffect(() => {
     db.collection("images")
       .orderBy("timestamp", "desc")
@@ -21,14 +23,15 @@ const Chats = () => {
         )
       );
   }, []);
-  console.log(posts);
-
+  const take_Pic = () => {
+    history.replace("/");
+  };
   return (
     <div className="chats">
       <div className="chat__header">
         <Avatar className="chat__avatar" />
         <div className="chat__search">
-          <SearchIcon />
+          <SearchIcon className="chat__searchIcon" />
           <input type="text" placeholder="Friends" />
         </div>
         <ChatBubbleIcon className="chat__message" />
@@ -50,6 +53,9 @@ const Chats = () => {
             />
           )
         )}
+      </div>
+      <div className="take_pic" onClick={take_Pic}>
+        <PhotoCameraIcon className="take_pic" />
       </div>
     </div>
   );

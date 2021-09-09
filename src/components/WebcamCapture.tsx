@@ -16,7 +16,6 @@ const WebcamCapture = () => {
     height: 400,
     facingMode: "user",
   };
-  // const img = useSelector(state => state.capture.img);
 
   const capture = useCallback(() => {
     const imageSrc = webcamRef.current.getScreenshot();

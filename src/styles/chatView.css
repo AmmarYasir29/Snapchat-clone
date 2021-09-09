@@ -1,0 +1,14 @@
+.chatview {
+  position: relative;
+}
+.chatview__img {
+  cursor: pointer;
+}
+.exitIcon {
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 15px;
+  color: white;
+}

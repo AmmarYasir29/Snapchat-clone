@@ -13,13 +13,6 @@ export const Chat = (props: any) => {
   const dispatch = useDispatch();
   const open = () => {
     dispatch(selectImage(props.imageUrl));
-    // if (!props.read) {
-    //   db.collection("images").doc(props.id).set(
-    //     {
-    //     props.read:true,
-    //   },
-    //   { merge:true});
-    // }
     history.push("/chats/view");
   };
 
@@ -27,7 +20,7 @@ export const Chat = (props: any) => {
     <div className="chat" onClick={open}>
       <Avatar src={props.profilePic} className="chat__pic" />
       <div className="chat__info">
-        <h4>ee{props.usename}</h4>
+        <h4>{props.username}</h4>
         <p>
           tap to view- <TimeAgo date={props.timestamp.toString()} />
         </p>

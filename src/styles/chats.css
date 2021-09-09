@@ -42,10 +42,26 @@ input::placeholder {
   box-shadow: 1px -7px 7px -6px rgba(0, 0, 0, 0.44);
   overflow: scroll;
 }
-.chats__posts {
+.chat__posts {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
 .chat__posts::-webkit-scrollbar {
   display: none;
+}
+
+.chat__searchIcon {
+  font-size: large !important;
+  color: white;
+}
+.chat__message {
+  font-size: larger !important;
+  color: white;
+}
+.take_pic {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(50%, 50%);
+  cursor: pointer;
 }

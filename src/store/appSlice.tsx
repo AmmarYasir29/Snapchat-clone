@@ -5,6 +5,7 @@ export const appSlice = createSlice({
   initialState: {
     user: null,
     selectedImage: null,
+    userAll: null,
   },
   reducers: {
     logout: state => {
